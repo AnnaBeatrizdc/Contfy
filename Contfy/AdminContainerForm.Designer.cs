@@ -198,6 +198,8 @@
             this.dgvContainer.Name = "dgvContainer";
             this.dgvContainer.Size = new System.Drawing.Size(322, 154);
             this.dgvContainer.TabIndex = 16;
+            this.dgvContainer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContainer_CellClick);
+            this.dgvContainer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContainer_CellContentClick);
             // 
             // label6
             // 
@@ -235,6 +237,7 @@
             this.Name = "AdminContainerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin de Container";
+            this.Load += new System.EventHandler(this.AdminContainerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContainer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

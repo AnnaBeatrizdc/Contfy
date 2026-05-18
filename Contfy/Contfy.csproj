@@ -65,6 +65,7 @@
     <Compile Include="AdminContainerForm.Designer.cs">
       <DependentUpon>AdminContainerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\AdminContainerDAL.cs" />
     <Compile Include="DAL\ConexaoDAL.cs" />
     <Compile Include="DAL\UsuarioDAL.cs" />
     <Compile Include="Erro.cs" />

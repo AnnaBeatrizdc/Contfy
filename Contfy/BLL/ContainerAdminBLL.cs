@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Contfy.DAL;
+using System.Data;
 
 namespace Contfy.BLL
 {
@@ -44,6 +46,20 @@ namespace Contfy.BLL
                 Erro.setMens("A localização é de preenchimento obrigatório!");
                 return;
             }
+
+            if (AdminContainerDAL.ExisteContainer(ADDContainer.getCodigo()))
+            {
+                Erro.setMens(
+                    "Container já cadastrado!"
+                );
+
+                return;
+            }
+
+            AdminContainerDAL.AdicionarContainer(
+                ADDContainer
+            );
+
         }
 
         public static void validaDadosAlterar(ContainerMdl ALContainer, char op)
@@ -54,6 +70,9 @@ namespace Contfy.BLL
                 Erro.setMens("O código é de preenchimento obrigatório!");
                 return;
             }
+
+            AdminContainerDAL.AlterarContainer(ALContainer);
+
         }
 
         public static void validaDadosDeletar(ContainerMdl DELContainer, char op)
@@ -64,6 +83,21 @@ namespace Contfy.BLL
                 Erro.setMens("O código é de preenchimento obrigatório!");
                 return;
             }
+
+            AdminContainerDAL.DeletarContainer( DELContainer.getCodigo());
+
         }
+
+        public static DataTable ListarContainers()
+        {
+            return AdminContainerDAL .ListarContainers();
+        }
+
+        public static DataTable FiltrarContainers(string pesquisa,string status)
+        {
+            return AdminContainerDAL.FiltrarContainers(pesquisa,status);
+        }
+
+
     }
 }

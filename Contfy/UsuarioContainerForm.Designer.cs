@@ -71,6 +71,7 @@
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(235, 20);
             this.txtPesquisar.TabIndex = 1;
+            this.txtPesquisar.TextChanged += new System.EventHandler(this.txtPesquisar_TextChanged);
             // 
             // btnBuscar
             // 
@@ -94,6 +95,7 @@
             this.cbFiltroStatus.Size = new System.Drawing.Size(121, 23);
             this.cbFiltroStatus.TabIndex = 1;
             this.cbFiltroStatus.Text = "Todos";
+            this.cbFiltroStatus.SelectedIndexChanged += new System.EventHandler(this.cbFiltroStatus_SelectedIndexChanged);
             // 
             // dgvContainers
             // 
@@ -157,6 +159,7 @@
             this.Controls.Add(this.txtPesquisar);
             this.Name = "UsuarioContainerForm";
             this.Text = "UsuarioContainerForm";
+            this.Load += new System.EventHandler(this.UsuarioContainerForm_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContainers)).EndInit();

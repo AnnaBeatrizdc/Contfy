@@ -116,20 +116,33 @@ namespace Contfy.BLL
                 return;
             }
 
-            // CRIAR OBJETO DAL
+            // VERIFICAR USUARIO/EMAIL
             UsuarioDAL dal = new UsuarioDAL();
 
-            //// INSERIR
-            //if (op == 'i')
-            //{
-            //    dal.Cadastrar(usuario);
-            //}
+            if (UsuarioDAL.ExisteUsuario(usuario.getUsuario()))
+            {
+            Erro.setMens("Usuário já cadastrado!");
 
-            //// ALTERAR
-            //if (op == 'a')
-            //{
-            //    dal.Alterar(usuario);
-            //}
+            return;
+
+            
+        }
+
+            if         
+                (UsuarioDAL.ExisteEmail(usuario.getEmail()))
+            {
+                    Erro.setMens("Email já cadastrado!");
+
+                    return;
+            }
+            // CRIAR OBJETO DAL
+            UsuarioDAL.CadastrarUsuario(usuario);
+        }
+            public static UsuarioMdl FazerLogin(string email, string senha)
+            {
+                     return UsuarioDAL.Login(email, senha);
+            }
+
+        
         }
     }
-}

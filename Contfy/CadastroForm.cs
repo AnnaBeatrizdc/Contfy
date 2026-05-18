@@ -52,6 +52,38 @@ namespace Contfy
 
                 // FECHAR CADASTRO
                 this.Close();
+
+
+                //VERIFICA SE É USUARIO OU ADMIN E DIRECIONA PARA O FORM CONRRESPONDENTE
+                UsuarioMdl usuario =
+                UsuarioBLL.FazerLogin(
+                txtEmail.Text,
+                txtSenha.Text);
+
+                if(usuario != null)
+{
+                if(usuario.getTipoUsuario() == "ADMIN")
+            {
+                AdminContainerForm tela =
+                    new AdminContainerForm();
+
+                    tela.Show();
+            }
+                else
+            {
+                UsuarioContainerForm tela =
+                    new UsuarioContainerForm();
+
+                    tela.Show();
+            }
+
+                    this.Hide();
+                }
+            else
+                {
+                    MessageBox.Show("Usuário ou senha inválidos");
+                }
+
             }
         }
 
@@ -64,6 +96,8 @@ namespace Contfy
             tbCidade.Text = cep.getLocalidade();
             tbEstado.Text = cep.getUf();
 
-        }
+        }s
+
+        
     }
 }

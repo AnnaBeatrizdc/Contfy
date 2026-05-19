@@ -48,7 +48,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(538, 58);
+            this.pnlTop.Size = new System.Drawing.Size(654, 58);
             this.pnlTop.TabIndex = 0;
             this.pnlTop.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTop_Paint);
             // 
@@ -90,7 +90,7 @@
             // 
             this.cbFiltroStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFiltroStatus.FormattingEnabled = true;
-            this.cbFiltroStatus.Location = new System.Drawing.Point(104, 111);
+            this.cbFiltroStatus.Location = new System.Drawing.Point(497, 77);
             this.cbFiltroStatus.Name = "cbFiltroStatus";
             this.cbFiltroStatus.Size = new System.Drawing.Size(121, 23);
             this.cbFiltroStatus.TabIndex = 1;
@@ -101,11 +101,11 @@
             // 
             this.dgvContainers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvContainers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContainers.Location = new System.Drawing.Point(12, 148);
+            this.dgvContainers.Location = new System.Drawing.Point(12, 118);
             this.dgvContainers.Name = "dgvContainers";
             this.dgvContainers.ReadOnly = true;
             this.dgvContainers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContainers.Size = new System.Drawing.Size(511, 290);
+            this.dgvContainers.Size = new System.Drawing.Size(630, 320);
             this.dgvContainers.TabIndex = 1;
             // 
             // label2
@@ -124,7 +124,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(49, 115);
+            this.label3.Location = new System.Drawing.Point(442, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 17);
             this.label3.TabIndex = 13;
@@ -136,7 +136,7 @@
             this.btnHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHistorico.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHistorico.ForeColor = System.Drawing.Color.White;
-            this.btnHistorico.Location = new System.Drawing.Point(203, 456);
+            this.btnHistorico.Location = new System.Drawing.Point(265, 458);
             this.btnHistorico.Name = "btnHistorico";
             this.btnHistorico.Size = new System.Drawing.Size(127, 28);
             this.btnHistorico.TabIndex = 15;
@@ -148,7 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(538, 498);
+            this.ClientSize = new System.Drawing.Size(654, 498);
             this.Controls.Add(this.btnHistorico);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbFiltroStatus);
@@ -158,6 +158,7 @@
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.txtPesquisar);
             this.Name = "UsuarioContainerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UsuarioContainerForm";
             this.Load += new System.EventHandler(this.UsuarioContainerForm_Load);
             this.pnlTop.ResumeLayout(false);

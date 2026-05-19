@@ -18,8 +18,7 @@ namespace Contfy
         {
             InitializeComponent();
 
-            this.Load +=
-            AdminContainerForm_Load;
+            this.Load += AdminContainerForm_Load;
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -42,6 +41,14 @@ namespace Contfy
             else
             {
                 MessageBox.Show("Cadastro do container realizado com sucesso!");
+                
+                tbCodigo.Clear();
+                tbNome.Clear();
+                cbStatus.Text = "";
+                tbLocalizacao.Clear();
+                tbResponsavel.Clear();
+                CarregarGrid();
+
             }
         }
 
@@ -50,9 +57,13 @@ namespace Contfy
             ContainerMdl container = new ContainerMdl();
 
             container.setCodigo(tbCodigo.Text);
+
             container.setNome(tbNome.Text);
+
             container.setStatus(cbStatus.Text);
+
             container.setLocalizacao(tbLocalizacao.Text);
+
             container.setResponsavel(tbResponsavel.Text);
 
             ContainerAdminBLL.validaDadosAlterar(container, 'U');
@@ -62,12 +73,12 @@ namespace Contfy
                 MessageBox.Show(Erro.getMens());
                 return;
             }
-            else
-            {
-                MessageBox.Show("Alteração do container realizada com sucesso!");
 
-                CarregarGrid();
-            }
+            MessageBox.Show("Container alterado com sucesso!");
+
+            CarregarGrid();
+        
+            
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -93,10 +104,8 @@ namespace Contfy
                 tbNome.Clear();
                 cbStatus.Text = "";
                 tbLocalizacao.Clear();
-
+                tbResponsavel.Clear();
             }
-
-
         }
 
         private void dgvContainer_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -135,6 +144,31 @@ namespace Contfy
                 dgvContainer.Rows[e.RowIndex]
                 .Cells["Localizacao"]
                 .Value.ToString();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ContainerMdl container = ContainerAdminBLL.BuscarPorCodigo(tbCodigo.Text);
+
+            if (Erro.getErro())
+            {
+                MessageBox.Show(Erro.getMens());
+                return;
+            }
+
+            if (container == null)
+            {
+                MessageBox.Show("Container não encontrado.");
+                return;
+            }
+
+            tbNome.Text = container.getNome();
+
+            cbStatus.Text = container.getStatus();
+
+            tbLocalizacao.Text = container.getLocalizacao();
+
+            tbResponsavel.Text = container.getResponsavel();
         }
     }
 }

@@ -12,31 +12,36 @@ using System.Threading.Tasks;
 
 namespace Contfy.BLL
 {
-    
     internal class UsuarioBLL
     {
-
-
-
-        public static void validaDadosLogin(UsuarioMdl umUsuario)
+        public static void validaDadosLogin(UsuarioMdl usuario)
         {
             Erro.setErro(false);
-            if (umUsuario.getUsuario().Equals(""))
+
+            usuario.setEmail(usuario.getEmail().ToLower().Trim());
+            if (usuario.getEmail().Equals(""))
             {
-                Erro.setMens("O usuário é de preenchimento obrigatório!");
+                Erro.setMens("O email é de preenchimento obrigatório!");
                 return;
             }
 
-            if (umUsuario.getSenha().Equals(""))
+            if (usuario.getSenha().Equals(""))
             {
                 Erro.setMens("A senha é de preenchimento obrigatória!");
                 return;
             }
         }
 
+        public static UsuarioMdl FazerLogin(UsuarioMdl usuario)
+        {
+            return UsuarioDAL.Login(usuario.getEmail(),usuario.getSenha());
+        }
+
         public static void ValidaDadosCadastro(UsuarioMdl usuario, char op)
         {
             Erro.setErro(false);
+
+            usuario.setEmail(usuario.getEmail().ToLower().Trim());
 
             // NOME
             if (usuario.getNome().Trim().Equals(""))
@@ -44,14 +49,10 @@ namespace Contfy.BLL
                 Erro.setMens("O nome é de preenchimento obrigatório!");
                 return;
             }
-            // USUÁRIO
-            if (usuario.getUsuario().Equals(""))
-            {
-                Erro.setMens("O usuário é de preenchimento obrigatório!");
-                return;
-            }
 
             // EMAIL
+            
+
             if (usuario.getEmail().Trim().Equals(""))
             {
                 Erro.setMens("O email é de preenchimento obrigatório!");
@@ -65,6 +66,15 @@ namespace Contfy.BLL
             if (!Regex.IsMatch(usuario.getEmail(), padraoEmail))
             {
                 Erro.setMens("Formato de email inválido!");
+                return;
+            }
+
+            if (usuario.getTipoUsuario().Trim().Equals(""))
+            {
+                Erro.setMens(
+                    "Selecione o tipo da conta!"
+                );
+
                 return;
             }
 
@@ -110,34 +120,14 @@ namespace Contfy.BLL
                 return;
             }
 
-
-            // VERIFICAR USUARIO/EMAIL - duplicado
-            UsuarioDAL dal = new UsuarioDAL();
-
-            if (UsuarioDAL.ExisteUsuario(usuario.getUsuario()))
+            if(UsuarioDAL.ExisteEmail(usuario.getEmail()))
             {
-            Erro.setMens("Usuário já cadastrado!");
-
-            return;
-
-            
-        }
-
-            if         
-                (UsuarioDAL.ExisteEmail(usuario.getEmail()))
-            {
-                    Erro.setMens("Email já cadastrado!");
-
-                    return;
+                Erro.setMens("Email já cadastrado!");
+                return;
             }
+
             // CRIAR OBJETO DAL
             UsuarioDAL.CadastrarUsuario(usuario);
         }
-            public static UsuarioMdl FazerLogin(string email, string senha)
-            {
-                     return UsuarioDAL.Login(email, senha);
-            }
-
-        
-        }
     }
+}

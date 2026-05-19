@@ -43,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dgvContainer = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContainer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.tbCodigo.Location = new System.Drawing.Point(109, 62);
             this.tbCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(200, 20);
+            this.tbCodigo.Size = new System.Drawing.Size(128, 20);
             this.tbCodigo.TabIndex = 0;
             // 
             // tbNome
@@ -194,9 +195,9 @@
             // dgvContainer
             // 
             this.dgvContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContainer.Location = new System.Drawing.Point(16, 297);
+            this.dgvContainer.Location = new System.Drawing.Point(386, 12);
             this.dgvContainer.Name = "dgvContainer";
-            this.dgvContainer.Size = new System.Drawing.Size(322, 154);
+            this.dgvContainer.Size = new System.Drawing.Size(569, 286);
             this.dgvContainer.TabIndex = 16;
             this.dgvContainer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContainer_CellClick);
             this.dgvContainer.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContainer_CellContentClick);
@@ -212,12 +213,28 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Painel do Admin";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
+            this.btnBuscar.Location = new System.Drawing.Point(241, 59);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(68, 24);
+            this.btnBuscar.TabIndex = 18;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // AdminContainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(351, 470);
+            this.ClientSize = new System.Drawing.Size(967, 310);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvContainer);
             this.Controls.Add(this.label5);
@@ -261,5 +278,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvContainer;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }

@@ -35,15 +35,48 @@ namespace Contfy
 
         private void btnLogar_Click(object sender, EventArgs e)
         {
-            UsuarioMdl umUsuario = new UsuarioMdl();
-            umUsuario.setUsuario(tbLoginUsuario.Text);
-            umUsuario.setSenha(tbLoginSenha.Text);
+            UsuarioMdl usuario = new UsuarioMdl();
+            usuario.setEmail(tbLoginUsuario.Text);
+            usuario.setSenha(tbLoginSenha.Text);
 
-            UsuarioBLL.validaDadosLogin(umUsuario);
+            UsuarioBLL.validaDadosLogin(usuario);
             if (Erro.getErro())
+            {
                 MessageBox.Show(Erro.getMens());
+                return;
+            }
             else
-                MessageBox.Show("Dados inseridos com sucesso!");
+            {
+                usuario = UsuarioBLL.FazerLogin(usuario);
+                if (usuario != null)
+                {
+                    if (usuario.getTipoUsuario() == "Admin")
+                    {
+                        AdminContainerForm AdminTela = new AdminContainerForm();
+
+                        AdminTela.Show();
+                    }
+                    else
+                    {
+                        UsuarioContainerForm UsuarioTela = new UsuarioContainerForm();
+
+                        UsuarioTela.Show();
+                    }
+
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Email ou senha inválidos!"
+                    );
+                }
+            }
+        }
+
+        private void UsuarioForm_Load(object sender, EventArgs e)
+        {
+            tbLoginSenha.UseSystemPasswordChar = true;
         }
     }
 }

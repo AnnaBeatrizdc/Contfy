@@ -36,11 +36,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
-            this.tbUsuario = new System.Windows.Forms.TextBox();
             this.tbSenha = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbEstado = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,7 +51,7 @@
             this.tbCidade = new System.Windows.Forms.TextBox();
             this.tbBairro = new System.Windows.Forms.TextBox();
             this.btnCCriarConta = new System.Windows.Forms.Button();
-            this.tbEstado = new System.Windows.Forms.TextBox();
+            this.cbTipoConta = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -70,13 +70,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbTipoConta);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.mtbTelefone);
-            this.groupBox1.Controls.Add(this.tbUsuario);
             this.groupBox1.Controls.Add(this.tbSenha);
             this.groupBox1.Controls.Add(this.tbEmail);
             this.groupBox1.Controls.Add(this.tbNome);
@@ -131,9 +131,9 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(20, 68);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 17);
+            this.label3.Size = new System.Drawing.Size(93, 17);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Usuario";
+            this.label3.Text = "Tipo da Conta";
             // 
             // label2
             // 
@@ -154,15 +154,6 @@
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(91, 23);
             this.mtbTelefone.TabIndex = 8;
-            // 
-            // tbUsuario
-            // 
-            this.tbUsuario.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUsuario.Location = new System.Drawing.Point(16, 87);
-            this.tbUsuario.Margin = new System.Windows.Forms.Padding(2);
-            this.tbUsuario.Name = "tbUsuario";
-            this.tbUsuario.Size = new System.Drawing.Size(200, 23);
-            this.tbUsuario.TabIndex = 4;
             // 
             // tbSenha
             // 
@@ -213,6 +204,15 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Endereço";
+            // 
+            // tbEstado
+            // 
+            this.tbEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbEstado.Location = new System.Drawing.Point(24, 217);
+            this.tbEstado.Margin = new System.Windows.Forms.Padding(2);
+            this.tbEstado.Name = "tbEstado";
+            this.tbEstado.Size = new System.Drawing.Size(200, 23);
+            this.tbEstado.TabIndex = 21;
             // 
             // label11
             // 
@@ -321,14 +321,17 @@
             this.btnCCriarConta.UseVisualStyleBackColor = false;
             this.btnCCriarConta.Click += new System.EventHandler(this.btnCCriarConta_Click);
             // 
-            // tbEstado
+            // cbTipoConta
             // 
-            this.tbEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbEstado.Location = new System.Drawing.Point(24, 217);
-            this.tbEstado.Margin = new System.Windows.Forms.Padding(2);
-            this.tbEstado.Name = "tbEstado";
-            this.tbEstado.Size = new System.Drawing.Size(200, 23);
-            this.tbEstado.TabIndex = 21;
+            this.cbTipoConta.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbTipoConta.FormattingEnabled = true;
+            this.cbTipoConta.Items.AddRange(new object[] {
+            "Usuario",
+            "Admin"});
+            this.cbTipoConta.Location = new System.Drawing.Point(16, 88);
+            this.cbTipoConta.Name = "cbTipoConta";
+            this.cbTipoConta.Size = new System.Drawing.Size(200, 23);
+            this.cbTipoConta.TabIndex = 16;
             // 
             // CadastroForm
             // 
@@ -358,7 +361,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tbUsuario;
         private System.Windows.Forms.TextBox tbSenha;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.TextBox tbNome;
@@ -380,5 +382,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbEstado;
+        private System.Windows.Forms.ComboBox cbTipoConta;
     }
 }

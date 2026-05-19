@@ -20,7 +20,7 @@ namespace Contfy
 
         private void pnlTop_Paint(object sender, PaintEventArgs e)
         {
-            BackColor = Color.FromArgb(30, 30, 45);
+            
         }
 
         private void UsuarioContainerForm_Load(object sender, EventArgs e)
@@ -35,8 +35,7 @@ namespace Contfy
 
         private void FiltrarGrid()
         {
-            dgvContainers.DataSource = ContainerAdminBLL.FiltrarContainers
-                (txtPesquisar.Text,cbFiltroStatus.Text);
+            dgvContainers.DataSource = ContainerAdminBLL.FiltrarContainers(txtPesquisar.Text, cbFiltroStatus.Text);
         }
 
         private void txtPesquisar_TextChanged(object sender, EventArgs e)

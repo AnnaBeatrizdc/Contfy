@@ -11,192 +11,159 @@ namespace Contfy.DAL
 {
     internal class UsuarioDAL
     {
-         public static UsuarioMdl Login(string email, string senha)
-{
-    SqlConnection conexao = ConexaoDAL.getConexao();
+        public static UsuarioMdl Login(string email, string senha)
+        {
+            SqlConnection conexao = ConexaoDAL.getConexao();
+            conexao.Open();
 
-    conexao.Open();
+            senha = BLL.Utils.Criptografia.criptografarSenha(senha);
 
-    senha = BLL.Utils.Criptografia
-        .criptografarSenha(senha);
+            string sql = @"SELECT * FROM Usuario
+                   WHERE ds_email = @Email
+                   AND ds_senha = @Senha";
 
-    string sql = @"SELECT * FROM Usuarios
-                   WHERE Email = @Email
-                   AND Senha = @Senha";
+            SqlCommand cmd = new SqlCommand(sql, conexao);
 
-    SqlCommand cmd = new SqlCommand(sql, conexao);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Senha", senha);
 
-    cmd.Parameters.AddWithValue("@Email", email);
-    cmd.Parameters.AddWithValue("@Senha", senha);
+            SqlDataReader reader = cmd.ExecuteReader();
 
-    SqlDataReader reader = cmd.ExecuteReader();
+            UsuarioMdl usuario = null;
 
-    UsuarioMdl usuario = null;
-
-             if (reader.Read())
+            if (reader.Read())
             {
-                    usuario = new UsuarioMdl(); 
+                usuario = new UsuarioMdl();
 
-                    usuario.setNome(
-                    reader["Nome"].ToString()
-                    );
-
-                    usuario.setEmail(
-                    reader["Email"].ToString()
-                    );
-
-                    usuario.setUsuario(
-                    reader["Usuario"].ToString()
-                    );
-
-                    usuario.setTipoUsuario(
-                    reader["TipoUsuario"].ToString()
-                    );
+                usuario.setTipoUsuario(reader["nm_tipoUsuario"].ToString());
             }
 
             conexao.Close();
 
-             return usuario;
+            return usuario;
 
-}
-            //VERIFICA SE EXISTE USUARIO
-             public static bool ExisteUsuario(string usuario)
-            {
-                bool existe = false;
-
-            try
-            {
-                using (SqlConnection conexao =
-                ConexaoDAL.getConexao())
-            {
-                conexao.Open();
-
-                string sql = @"SELECT COUNT(*)
-                           FROM Usuarios
-                           WHERE Usuario = @Usuario";
-
-                using (SqlCommand cmd =
-                new SqlCommand(sql, conexao))
-            {
-                cmd.Parameters.AddWithValue("@Usuario", usuario);
-
-                int quantidade =
-                    Convert.ToInt32(
-                        cmd.ExecuteScalar()
-                    );
-
-                existe = quantidade > 0;
-            }
         }
-    }
-                catch (Exception ex)
-            {
-                throw new Exception("Erro ao verificar usuário: "+ ex.Message);
-            }
-
-                return existe;
-            }
-
-            //VERIFICA SE EXISTE EMAIL
-            public static bool ExisteEmail(string email)
-{
+        //VERIFICA SE EXISTE EMAIL
+        public static bool ExisteEmail(string email)
+        {
             bool existe = false;
 
             try
-    {
-                        using (SqlConnection conexao =
-                         ConexaoDAL.getConexao())
-        {
-                        conexao.Open();
-
-                        string sql = @"SELECT COUNT(*)
-                           FROM Usuarios
-                           WHERE Email = @Email";
-
-                        using (SqlCommand cmd =
-                        new SqlCommand(sql, conexao))
             {
-                        cmd.Parameters.AddWithValue(
-                        "@Email", email);
+                using (SqlConnection conexao = ConexaoDAL.getConexao())
+                {
+                    conexao.Open();
 
-                        int quantidade =
-                        Convert.ToInt32(
-                        cmd.ExecuteScalar()
-                    );
+                    string sql = @"SELECT COUNT(*)
+                           FROM Usuario
+                           WHERE ds_email = @Email";
 
-                existe = quantidade > 0;
+                    using (SqlCommand cmd = new SqlCommand(sql, conexao))
+                    {
+                        cmd.Parameters.AddWithValue("@Email", email);
+
+                        int quantidade =Convert.ToInt32(cmd.ExecuteScalar());
+                        existe = quantidade > 0;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao verificar email: " + ex.Message);
+            }
+
+            return existe;
         }
-    }
-                catch (Exception ex)
-            {
-                throw new Exception("Erro ao verificar email: "+ ex.Message);
-            }
 
-                return existe;
-}
-
-                public static void CadastrarUsuario(UsuarioMdl usuario)
-{
-                try
-    {
-                 using (SqlConnection conexao =
-                ConexaoDAL.getConexao())
+        public static void CadastrarUsuario(UsuarioMdl usuario)
         {
-            conexao.Open();
+            try
+            {
+                using (SqlConnection conexao =ConexaoDAL.getConexao())
+                {
+                    conexao.Open();
 
-            string sql = @"INSERT INTO Usuarios
+                    string sql = @"INSERT INTO Usuario
                            (
-                               Nome,
-                               Usuario,
-                               Email,
-                               Senha,
-                               TipoUsuario
+                               nm_nome,
+                               nm_tipoUsuario,
+                               ds_email,
+                               ds_senha,
+                               cd_telefone,
+                               cd_CEP,
+                               nm_logradouro,
+                               nm_bairro,
+                               nm_localidade,
+                               sg_uf
                            )
                            VALUES
                            (
                                @Nome,
-                               @Usuario,
+                               @TipoUsuario,
                                @Email,
                                @Senha,
-                               @TipoUsuario
+                               @Telefone,
+                               @CEP,
+                               @Logradouro,
+                               @Bairro,
+                               @Localidade,
+                               @UF
                            )";
 
-            using (SqlCommand cmd =
-                new SqlCommand(sql, conexao))
-            {
-                cmd.Parameters.AddWithValue(
-                    "@Nome",
-                    usuario.getNome());
+                    using (SqlCommand cmd =
+                        new SqlCommand(sql, conexao))
+                    {
+                        cmd.Parameters.AddWithValue(
+                            "@Nome",
+                            usuario.getNome());
 
-                cmd.Parameters.AddWithValue(
-                    "@Usuario",
-                    usuario.getUsuario());
+                        cmd.Parameters.AddWithValue(
+                            "@TipoUsuario",
+                            usuario.getTipoUsuario());
 
-                cmd.Parameters.AddWithValue(
-                    "@Email",
-                    usuario.getEmail());
+                        cmd.Parameters.AddWithValue(
+                            "@Email",
+                            usuario.getEmail());
 
-                cmd.Parameters.AddWithValue(
-                    "@Senha",
-                    usuario.getSenha());
+                        cmd.Parameters.AddWithValue(
+                            "@Senha",
+                            usuario.getSenha());
 
-                cmd.Parameters.AddWithValue(
-                    "@TipoUsuario",
-                    usuario.getTipoUsuario());
+                        cmd.Parameters.AddWithValue(
+                            "@Telefone",
+                            usuario.getTelefone());
 
-                cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue(
+                            "@CEP",
+                            usuario.getCep());
+
+                        cmd.Parameters.AddWithValue(
+                            "@Logradouro",
+                            usuario.getLogradouro());
+
+                        cmd.Parameters.AddWithValue(
+                            "@Bairro",
+                            usuario.getBairro());
+
+                        cmd.Parameters.AddWithValue(
+                            "@Localidade",
+                            usuario.getLocalidade());
+
+                        cmd.Parameters.AddWithValue(
+                            "@UF",
+                            usuario.getUf());
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
-        }
-    }
-    catch(Exception ex)
-    {
-        throw new Exception(
-            "Erro ao cadastrar usuário: "
-            + ex.Message
-        );
-    }
-
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Erro ao cadastrar usuário: "
+                    + ex.Message
+                );
+            }
         }
     }
 }

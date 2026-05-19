@@ -47,6 +47,12 @@ namespace Contfy.BLL
                 return;
             }
 
+            if (ADDContainer.getResponsavel().Trim().Equals(""))
+            {
+                Erro.setMens("O responsável é de preenchimento obrigatório!");
+                return;
+            }
+
             if (AdminContainerDAL.ExisteContainer(ADDContainer.getCodigo()))
             {
                 Erro.setMens(
@@ -62,17 +68,56 @@ namespace Contfy.BLL
 
         }
 
-        public static void validaDadosAlterar(ContainerMdl ALContainer, char op)
+        public static void validaDadosAlterar(ContainerMdl container, char op)
         {
             Erro.setErro(false);
-            if (ALContainer.getCodigo().Trim().Equals(""))
+
+            if (string.IsNullOrWhiteSpace(container.getCodigo()))
             {
-                Erro.setMens("O código é de preenchimento obrigatório!");
+                Erro.setMens("Digite o código.");
                 return;
             }
 
-            AdminContainerDAL.AlterarContainer(ALContainer);
+            if (string.IsNullOrWhiteSpace(container.getNome()))
+            {
+                Erro.setMens("Digite o nome.");
+                return;
+            }
 
+            if (string.IsNullOrWhiteSpace(container.getStatus()))
+            {
+                Erro.setMens("Digite o status.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(container.getLocalizacao()))
+            {
+                Erro.setMens("Digite a localização.");
+                return;
+            }
+
+            AdminContainerDAL.AlterarContainer(container);
+        }
+
+        public static ContainerMdl BuscarPorCodigo(string codigo)
+        {
+            Erro.setErro(false);
+
+            if (string.IsNullOrWhiteSpace(codigo))
+            {
+                Erro.setMens("Digite o código do container.");
+                return null;
+            }
+
+            ContainerMdl container = AdminContainerDAL.BuscarPorCodigo(codigo);
+
+            if (container == null)
+            {
+                Erro.setMens("Código não encontrado.");
+                return null;
+            }
+
+            return container;
         }
 
         public static void validaDadosDeletar(ContainerMdl DELContainer, char op)
@@ -90,7 +135,7 @@ namespace Contfy.BLL
 
         public static DataTable ListarContainers()
         {
-            return AdminContainerDAL .ListarContainers();
+            return AdminContainerDAL.ListarContainers();
         }
 
         public static DataTable FiltrarContainers(string pesquisa,string status)

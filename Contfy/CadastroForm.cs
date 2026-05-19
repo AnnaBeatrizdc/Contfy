@@ -26,16 +26,17 @@ namespace Contfy
             UsuarioMdl usuario = new UsuarioMdl();
 
             usuario.setNome(tbNome.Text);
-            usuario.setUsuario(tbUsuario.Text);
+            usuario.setTipoUsuario(cbTipoConta.SelectedItem.ToString());
             usuario.setEmail(tbEmail.Text);
             usuario.setSenha(tbSenha.Text);
             usuario.setTelefone(mtbTelefone.Text);
+            usuario.setCep(mtbCEP.Text);
             usuario.setLogradouro(tbRua.Text);
             usuario.setBairro(tbBairro.Text);
             usuario.setLocalidade(tbCidade.Text);
             usuario.setUf(tbEstado.Text);
 
-            UsuarioBLL.ValidaDadosCadastro(usuario, 'i');
+            UsuarioBLL.ValidaDadosCadastro(usuario, 'I');
 
             if (Erro.getErro())
             {
@@ -45,46 +46,12 @@ namespace Contfy
             else
             {
                 MessageBox.Show("Cadastro realizado com sucesso!");
-
-                // ABRIR LOGIN
-                UsuarioForm tela = new UsuarioForm();
-                tela.Show();
-
-                // FECHAR CADASTRO
                 this.Close();
-
-
-                //VERIFICA SE É USUARIO OU ADMIN E DIRECIONA PARA O FORM CONRRESPONDENTE
-                UsuarioMdl usuario =
-                UsuarioBLL.FazerLogin(
-                txtEmail.Text,
-                txtSenha.Text);
-
-                if(usuario != null)
-{
-                if(usuario.getTipoUsuario() == "ADMIN")
-            {
-                AdminContainerForm tela =
-                    new AdminContainerForm();
-
-                    tela.Show();
-            }
-                else
-            {
-                UsuarioContainerForm tela =
-                    new UsuarioContainerForm();
-
-                    tela.Show();
+                UsuarioForm telaUsuario = new UsuarioForm();
+                telaUsuario.Show();
             }
 
-                    this.Hide();
-                }
-            else
-                {
-                    MessageBox.Show("Usuário ou senha inválidos");
-                }
-
-            }
+            
         }
 
         private void mtbCEP_Leave(object sender, EventArgs e)
@@ -95,9 +62,6 @@ namespace Contfy
             tbBairro.Text = cep.getBairro();
             tbCidade.Text = cep.getLocalidade();
             tbEstado.Text = cep.getUf();
-
-        }s
-
-        
+        }
     }
 }

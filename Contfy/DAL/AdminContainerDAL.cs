@@ -38,15 +38,15 @@ namespace Contfy.DAL
 
                     using (SqlCommand cmd = new SqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@Codigo",container.getCodigo());
+                        cmd.Parameters.AddWithValue("@Codigo", container.getCodigo());
 
-                        cmd.Parameters.AddWithValue("@Nome",container.getNome());
+                        cmd.Parameters.AddWithValue("@Nome", container.getNome());
 
-                        cmd.Parameters.AddWithValue("@Status",container.getStatus());
+                        cmd.Parameters.AddWithValue("@Status", container.getStatus());
 
-                        cmd.Parameters.AddWithValue("@Localizacao",container.getLocalizacao());
+                        cmd.Parameters.AddWithValue("@Localizacao", container.getLocalizacao());
 
-                        cmd.Parameters.AddWithValue("@Responsavel",container.getResponsavel());
+                        cmd.Parameters.AddWithValue("@Responsavel", container.getResponsavel());
 
                         cmd.ExecuteNonQuery();
                     }
@@ -74,7 +74,7 @@ namespace Contfy.DAL
 
                     using (SqlCommand cmd = new SqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@Codigo",codigo);
+                        cmd.Parameters.AddWithValue("@Codigo", codigo);
 
                         int quantidade = Convert.ToInt32(cmd.ExecuteScalar());
                         existe = quantidade > 0;
@@ -83,7 +83,7 @@ namespace Contfy.DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao verificar container: "+ ex.Message);
+                throw new Exception("Erro ao verificar container: " + ex.Message);
             }
             return existe;
         }
@@ -133,13 +133,13 @@ namespace Contfy.DAL
 
                     using (SqlCommand cmd = new SqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@Codigo",container.getCodigo());
+                        cmd.Parameters.AddWithValue("@Codigo", container.getCodigo());
 
-                        cmd.Parameters.AddWithValue("@Nome",container.getNome());
+                        cmd.Parameters.AddWithValue("@Nome", container.getNome());
 
-                        cmd.Parameters.AddWithValue("@Status",container.getStatus());
+                        cmd.Parameters.AddWithValue("@Status", container.getStatus());
 
-                        cmd.Parameters.AddWithValue("@Localizacao",container.getLocalizacao());
+                        cmd.Parameters.AddWithValue("@Localizacao", container.getLocalizacao());
 
                         cmd.Parameters.AddWithValue("@Responsavel", container.getResponsavel());
 
@@ -149,7 +149,7 @@ namespace Contfy.DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao alterar container: "+ ex.Message);
+                throw new Exception("Erro ao alterar container: " + ex.Message);
             }
         }
 
@@ -162,15 +162,15 @@ namespace Contfy.DAL
                 conexao.Open();
 
                 string sql = @"SELECT
-                            c.cd_codigo,
-                            c.nm_nome,
-                            c.nm_status,
-                            c.ds_localizacao,
-                            u.cd_codigo AS Responsavel
-                            FROM Container c
-                            LEFT JOIN Usuario u
-                                ON c.cd_usuario = u.cd_codigo
-                            WHERE c.cd_codigo = @Codigo";
+            c.cd_codigo,
+            c.nm_nome,
+            c.nm_status,
+            c.ds_localizacao,
+            u.cd_codigodeee AS CodigoResponsavel
+        FROM Container c
+        LEFT JOIN Usuario u
+            ON c.cd_usuario = u.cd_codigo
+        WHERE c.cd_codigo = @Codigo";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conexao))
                 {
@@ -195,7 +195,7 @@ namespace Contfy.DAL
                                 dr["ds_localizacao"].ToString());
 
                             container.setResponsavel(
-                                dr["Responsavel"].ToString());
+                                dr["CodigoResponsavel"].ToString());
                         }
                     }
                 }
@@ -218,7 +218,7 @@ namespace Contfy.DAL
 
                     using (SqlCommand cmd = new SqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@Codigo",codigo);
+                        cmd.Parameters.AddWithValue("@Codigo", codigo);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -226,53 +226,67 @@ namespace Contfy.DAL
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao deletar container: "+ ex.Message);
+                throw new Exception("Erro ao deletar container: " + ex.Message);
             }
         }
 
-        public static DataTable FiltrarContainers(string pesquisa,string status)
+        public static DataTable FiltrarContainers(string pesquisa, string status)
         {
             DataTable tabela = new DataTable();
+
             try
             {
                 using (SqlConnection conexao = ConexaoDAL.getConexao())
                 {
                     conexao.Open();
 
-                    string sql =
-                    @"SELECT * FROM Container
-                    WHERE
-                    (
-                    cd_codigo LIKE @Pesquisa
-                    OR nm_nome LIKE @Pesquisa
-                    OR ds_localizacao LIKE @Pesquisa
-                    OR cd_usuario LIKE @Pesquisa
-                    )";
+                    string sql = @"
+                        SELECT
+                c.cd_codigo AS CodigoContainer,
+                c.nm_nome AS NomeContainer,
+                c.nm_status AS StatusContainer,
+                c.ds_localizacao AS LocalizacaoContainer,
+                u.cd_codigo AS CodigoResponsavel,
+                u.nm_nome AS NomeResponsavel
+            FROM Container c
+            LEFT JOIN Usuario u
+                ON c.cd_usuario = u.cd_codigo
+            WHERE
+            (
+                c.cd_codigo LIKE @Pesquisa
+                OR c.nm_nome LIKE @Pesquisa
+                OR c.ds_localizacao LIKE @Pesquisa
+                OR u.nm_nome LIKE @Pesquisa
+            )";
 
-                    if (status != "TODOS")
+                    if (status != "Todos")
                     {
-                        sql += " AND Status = @Status";
+                        sql += " AND c.nm_status = @Status";
                     }
 
                     using (SqlCommand cmd = new SqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@Pesquisa","%" + pesquisa + "%");
+                        cmd.Parameters.AddWithValue("@Pesquisa", "%" + pesquisa + "%");
 
-                        if (status != "TODOS")
+                        if (status != "Todos")
                         {
-                            cmd.Parameters.AddWithValue("@Status",status);
+                            cmd.Parameters.AddWithValue("@Status", status);
                         }
 
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
+
                         da.Fill(tabela);
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao filtrar container: "+ ex.Message);
+                throw new Exception("Erro ao filtrar container: " + ex.Message);
             }
+
             return tabela;
         }
+
+
     }
 }

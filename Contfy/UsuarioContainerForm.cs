@@ -22,17 +22,6 @@ namespace Contfy
         {
             
         }
-
-        private void UsuarioContainerForm_Load(object sender, EventArgs e)
-        {
-            cbFiltroStatus.Items.Add("TODOS");
-            cbFiltroStatus.Items.Add("PREPARANDO");
-            cbFiltroStatus.Items.Add("EM TRANSITO");
-            cbFiltroStatus.Items.Add("ENTREGUE");
-
-            cbFiltroStatus.SelectedIndex = 0;
-        }
-
         private void FiltrarGrid()
         {
             dgvContainers.DataSource = ContainerAdminBLL.FiltrarContainers(txtPesquisar.Text, cbFiltroStatus.Text);
@@ -46,6 +35,16 @@ namespace Contfy
         private void cbFiltroStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltrarGrid();
+        }
+
+        private void UsuarioContainerForm_Load_1(object sender, EventArgs e)
+        {
+            cbFiltroStatus.Items.Add("Todos");
+            cbFiltroStatus.Items.Add("No porto");
+            cbFiltroStatus.Items.Add("Em trânsito");
+            cbFiltroStatus.Items.Add("Entregue");
+
+            cbFiltroStatus.SelectedIndex = 0;
         }
     }
 }

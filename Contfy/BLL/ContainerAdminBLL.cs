@@ -101,23 +101,13 @@ namespace Contfy.BLL
 
         public static ContainerMdl BuscarPorCodigo(string codigo)
         {
-            Erro.setErro(false);
-
             if (string.IsNullOrWhiteSpace(codigo))
             {
-                Erro.setMens("Digite o código do container.");
+                Erro.setMens("Código inválido.");
                 return null;
             }
 
-            ContainerMdl container = AdminContainerDAL.BuscarPorCodigo(codigo);
-
-            if (container == null)
-            {
-                Erro.setMens("Código não encontrado.");
-                return null;
-            }
-
-            return container;
+            return AdminContainerDAL.BuscarPorCodigo(codigo);
         }
 
         public static void validaDadosDeletar(ContainerMdl DELContainer, char op)

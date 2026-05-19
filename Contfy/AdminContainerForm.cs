@@ -77,8 +77,12 @@ namespace Contfy
             MessageBox.Show("Container alterado com sucesso!");
 
             CarregarGrid();
-        
-            
+
+            tbCodigo.Clear();
+            tbNome.Clear();
+            cbStatus.Text = "";
+            tbLocalizacao.Clear();
+            tbResponsavel.Clear();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -125,25 +129,32 @@ namespace Contfy
 
         private void dgvContainer_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-                tbCodigo.Text =
-                dgvContainer.Rows[e.RowIndex]
-                .Cells["Codigo"]
-                .Value.ToString();
+            if (e.RowIndex >= 0)
+            {
+                string codigo =
+                    dgvContainer.Rows[e.RowIndex]
+                    .Cells["CodigoContainer"]
+                    .Value.ToString();
 
-                tbNome.Text =
-                dgvContainer.Rows[e.RowIndex]
-                .Cells["Nome"]
-                .Value.ToString();
+                ContainerMdl container =
+                    ContainerAdminBLL.BuscarPorCodigo(codigo);
 
-                cbStatus.Text =
-                dgvContainer.Rows[e.RowIndex]
-                .Cells["Status"]
-                .Value.ToString();
+                if (container == null)
+                {
+                    MessageBox.Show("Container não encontrado.");
+                    return;
+                }
 
-                tbLocalizacao.Text =
-                dgvContainer.Rows[e.RowIndex]
-                .Cells["Localizacao"]
-                .Value.ToString();
+                tbCodigo.Text = container.getCodigo();
+
+                tbNome.Text = container.getNome();
+
+                cbStatus.Text = container.getStatus();
+
+                tbLocalizacao.Text = container.getLocalizacao();
+
+                tbResponsavel.Text = container.getResponsavel();
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

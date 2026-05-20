@@ -23,6 +23,7 @@ namespace Contfy
 
         private void cbMostrarSenha_CheckedChanged(object sender, EventArgs e)
         {
+            // Mostrar ou ocultar a senha com base no estado do CheckBox
             tbLoginSenha.UseSystemPasswordChar = !cbMostrarSenha.Checked;
         }
 

@@ -70,7 +70,6 @@
     <Compile Include="DAL\UsuarioDAL.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Models\ContainerMdl.cs" />
-    <Compile Include="Models\CepMdl.cs" />
     <Compile Include="Models\UsuarioMdl.cs" />
     <Compile Include="UsuarioContainerForm.cs">
       <SubType>Form</SubType>

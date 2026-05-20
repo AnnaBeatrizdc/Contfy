@@ -166,7 +166,7 @@ namespace Contfy.DAL
             c.nm_nome,
             c.nm_status,
             c.ds_localizacao,
-            u.cd_codigodeee AS CodigoResponsavel
+            u.cd_codigo AS CodigoResponsavel
         FROM Container c
         LEFT JOIN Usuario u
             ON c.cd_usuario = u.cd_codigo

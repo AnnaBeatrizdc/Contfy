@@ -8,6 +8,7 @@ namespace Contfy.Models
 {
     internal class UsuarioMdl
     {
+        // Atributos de classe
         public String nome;
         public String tipoUsuario;
         public String email;
@@ -19,6 +20,7 @@ namespace Contfy.Models
         public String localidade;
         public String uf;
 
+        // Setters = colocar o valor dentro da variavel
         public void setNome(String _nome) { nome = _nome; }
         public void setTipoUsuario(String _tipoUsuario) { tipoUsuario = _tipoUsuario; }
         public void setSenha(String _senha) { senha = _senha; }
@@ -30,6 +32,7 @@ namespace Contfy.Models
         public void setLocalidade(String _localidade) { localidade = _localidade; }
         public void setUf(String _uf) { uf = _uf; }
 
+        // Getters = pegar o valor que foi guardada na variavel
         public String getNome() { return nome; }
         public String getTipoUsuario() { return tipoUsuario; }
         public String getSenha() { return senha; }

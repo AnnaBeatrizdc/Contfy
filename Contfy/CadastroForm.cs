@@ -22,9 +22,10 @@ namespace Contfy
         }
         private void btnCCriarConta_Click(object sender, EventArgs e)
         {
-
+            // Criar um objeto UsuarioMdl e preencher com os dados do formulário
             UsuarioMdl usuario = new UsuarioMdl();
 
+            // Preencher o objeto usuario com os dados do formulário
             usuario.setNome(tbNome.Text);
             usuario.setTipoUsuario(cbTipoConta.SelectedItem.ToString());
             usuario.setEmail(tbEmail.Text);
@@ -36,8 +37,8 @@ namespace Contfy
             usuario.setLocalidade(tbCidade.Text);
             usuario.setUf(tbEstado.Text);
 
+            // Validar os dados do usuário usando a classe UsuarioBLL e exibir mensagens de erro ou sucesso
             UsuarioBLL.ValidaDadosCadastro(usuario, 'I');
-
             if (Erro.getErro())
             {
                 MessageBox.Show(Erro.getMens());
@@ -45,6 +46,7 @@ namespace Contfy
             }
             else
             {
+                // Se os dados forem válidos, inserir o usuário no banco de dados usando a classe UsuarioDAL e exibir uma mensagem de sucesso
                 MessageBox.Show("Cadastro realizado com sucesso!");
                 this.Close();
                 UsuarioForm telaUsuario = new UsuarioForm();
@@ -56,6 +58,7 @@ namespace Contfy
 
         private void mtbCEP_Leave(object sender, EventArgs e)
         {
+            // Quando o usuário sair do campo de CEP, buscar as informações do endereço usando a classe CepBLL e preencher os campos de rua, bairro, cidade e estado
             UsuarioMdl cep = CepBLL1.BuscarCEP(mtbCEP.Text);
 
             tbRua.Text = cep.getLogradouro();

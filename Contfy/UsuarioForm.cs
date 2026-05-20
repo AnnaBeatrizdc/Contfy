@@ -29,17 +29,21 @@ namespace Contfy
 
         private void lnkCriarConta_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Abrir a tela de cadastro
             CadastroForm telaCadastro = new CadastroForm();
             telaCadastro.Show();
-            this.Hide();
+
+            this.Hide(); // Esconder a tela de login
         }
 
         private void btnLogar_Click(object sender, EventArgs e)
         {
+            // Criar um objeto UsuarioMdl e preencher com os dados do formulário
             UsuarioMdl usuario = new UsuarioMdl();
             usuario.setEmail(tbLoginUsuario.Text);
             usuario.setSenha(tbLoginSenha.Text);
 
+            // Validar os dados de login usando a classe UsuarioBLL
             UsuarioBLL.validaDadosLogin(usuario);
             if (Erro.getErro())
             {
@@ -48,16 +52,18 @@ namespace Contfy
             }
             else
             {
+                // Tentar fazer login usando a classe UsuarioBLL
                 usuario = UsuarioBLL.FazerLogin(usuario);
-                if (usuario != null)
+                if (usuario != null) // Verifica se o login está correto
                 {
-                    if (usuario.getTipoUsuario() == "Admin")
+                    // Se o login for bem-sucedido, verifica o tipo de usuário e abre a tela correspondente
+                    if (usuario.getTipoUsuario() == "Admin") // Se for um usuário do tipo "Admin", abre a tela de administração
                     {
                         AdminContainerForm AdminTela = new AdminContainerForm();
 
                         AdminTela.Show();
                     }
-                    else
+                    else // Se for um usuário do tipo "Usuario", abre a tela de usuário
                     {
                         UsuarioContainerForm UsuarioTela = new UsuarioContainerForm();
 
@@ -66,7 +72,7 @@ namespace Contfy
 
                     this.Hide();
                 }
-                else
+                else // Caso o login seja incorreto, exibe uma mensagem de erro
                 {
                     MessageBox.Show(
                         "Email ou senha inválidos!"
@@ -77,6 +83,7 @@ namespace Contfy
 
         private void UsuarioForm_Load(object sender, EventArgs e)
         {
+            // Configura o TextBox de senha para ocultar os caracteres digitados por padrão
             tbLoginSenha.UseSystemPasswordChar = true;
         }
     }

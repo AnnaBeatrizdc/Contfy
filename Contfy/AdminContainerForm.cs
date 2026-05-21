@@ -136,8 +136,7 @@ namespace Contfy
                     .Cells["CodigoContainer"]
                     .Value.ToString();
 
-                ContainerMdl container =
-                    ContainerAdminBLL.BuscarPorCodigo(codigo);
+                ContainerMdl container = ContainerAdminBLL.BuscarPorCodigo(codigo);
 
                 if (container == null)
                 {

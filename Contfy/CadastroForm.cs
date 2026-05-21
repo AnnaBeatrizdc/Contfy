@@ -27,7 +27,7 @@ namespace Contfy
 
             // Preencher o objeto usuario com os dados do formulário
             usuario.setNome(tbNome.Text);
-            usuario.setTipoUsuario(cbTipoConta.SelectedItem.ToString());
+            usuario.setTipoUsuario(cbTipoConta.Text);
             usuario.setEmail(tbEmail.Text);
             usuario.setSenha(tbSenha.Text);
             usuario.setTelefone(mtbTelefone.Text);
@@ -57,6 +57,28 @@ namespace Contfy
         }
 
         private void mtbCEP_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbMostrarSenha_CheckedChanged(object sender, EventArgs e)
+        {
+            // Mostrar ou ocultar a senha com base no estado do CheckBox
+            tbSenha.UseSystemPasswordChar = !cbMostrarSenha.Checked;
+        }
+
+        private void CadastroForm_Load(object sender, EventArgs e)
+        {
+            // Configura o TextBox de senha para ocultar os caracteres digitados por padrão
+            tbSenha.UseSystemPasswordChar = true;
+        }
+
+        private void mtbCEP_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
             // Quando o usuário sair do campo de CEP, buscar as informações do endereço usando a classe CepBLL e preencher os campos de rua, bairro, cidade e estado
             UsuarioMdl cep = CepBLL1.BuscarCEP(mtbCEP.Text);

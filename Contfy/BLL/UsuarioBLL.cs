@@ -51,20 +51,22 @@ namespace Contfy.BLL
         {
             Erro.setErro(false); // Zero o erro
 
-            // Padronizar email: tudo minúsculo e sem espaços
-            usuario.setEmail(usuario.getEmail().ToLower().Trim());
-
-            // Padronizar nome: primeira letra maiúscula e o resto minúsculo
-            usuario.setNome(char.ToUpper(usuario.getNome()[0]) + usuario.getNome().Substring(1).ToLower());
-
-            // Criptografa a senha usando o método criptografarSenha da classe Criptografia
-            usuario.setSenha(Criptografia.criptografarSenha(usuario.getSenha()));
-
             // NOME
             // Valida se o campo nome foi preenchido
             if (usuario.getNome().Trim().Equals(""))
             {
                 Erro.setMens("O nome é de preenchimento obrigatório!");
+                return;
+            }
+
+            // Padronizar nome: primeira letra maiúscula e o resto minúsculo
+            usuario.setNome(char.ToUpper(usuario.getNome()[0]) + usuario.getNome().Substring(1).ToLower());
+
+            // TIPO DE USUÁRIO
+            // Valida se o campo tipo de usuário foi selecionado
+            if (usuario.getTipoUsuario().Trim().Equals(""))
+            {
+                Erro.setMens("Selecione o tipo da conta!");
                 return;
             }
 
@@ -93,13 +95,8 @@ namespace Contfy.BLL
                 return;
             }
 
-            // TIPO DE USUÁRIO
-            // Valida se o campo tipo de usuário foi selecionado
-            if (usuario.getTipoUsuario().Trim().Equals(""))
-            {
-                Erro.setMens("Selecione o tipo da conta!");
-                return;
-            }
+            // Padronizar email: tudo minúsculo e sem espaços
+            usuario.setEmail(usuario.getEmail().ToLower().Trim());
 
             // SENHA
             // Valida se o campo senha foi preenchido
@@ -115,6 +112,9 @@ namespace Contfy.BLL
                 Erro.setMens("A senha deve ter no mínimo 6 caracteres!");
                 return;
             }
+
+            // Criptografa a senha usando o método criptografarSenha da classe Criptografia
+            usuario.setSenha(Criptografia.criptografarSenha(usuario.getSenha()));
 
             // TELEFONE
             // Formata o telefone para o formato (XX) XXXXX-XXXX usando expressão regular (REGEX)

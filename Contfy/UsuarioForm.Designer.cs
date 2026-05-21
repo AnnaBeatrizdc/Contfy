@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsuarioForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbLoginUsuario = new System.Windows.Forms.TextBox();
@@ -118,9 +119,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(49, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 17);
+            this.label2.Size = new System.Drawing.Size(60, 17);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Usuario";
+            this.label2.Text = "Usuario*";
             // 
             // label4
             // 
@@ -129,9 +130,9 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(49, 150);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 17);
+            this.label4.Size = new System.Drawing.Size(51, 17);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Senha";
+            this.label4.Text = "Senha*";
             // 
             // pictureBox1
             // 
@@ -174,11 +175,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "UsuarioForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Tela de Login";
+            this.Text = "Contfy - Login";
             this.Load += new System.EventHandler(this.UsuarioForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

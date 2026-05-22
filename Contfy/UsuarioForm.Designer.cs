@@ -50,7 +50,7 @@
             this.label1.Location = new System.Drawing.Point(71, 64);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 30);
+            this.label1.Size = new System.Drawing.Size(170, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bem-Vindo!";
             // 
@@ -62,7 +62,7 @@
             this.label3.Location = new System.Drawing.Point(86, 264);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 15);
+            this.label3.Size = new System.Drawing.Size(112, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Não tem login?";
             // 
@@ -72,7 +72,7 @@
             this.tbLoginUsuario.Location = new System.Drawing.Point(43, 121);
             this.tbLoginUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.tbLoginUsuario.Name = "tbLoginUsuario";
-            this.tbLoginUsuario.Size = new System.Drawing.Size(180, 24);
+            this.tbLoginUsuario.Size = new System.Drawing.Size(180, 28);
             this.tbLoginUsuario.TabIndex = 4;
             // 
             // tbLoginSenha
@@ -81,7 +81,7 @@
             this.tbLoginSenha.Location = new System.Drawing.Point(43, 169);
             this.tbLoginSenha.Margin = new System.Windows.Forms.Padding(2);
             this.tbLoginSenha.Name = "tbLoginSenha";
-            this.tbLoginSenha.Size = new System.Drawing.Size(180, 24);
+            this.tbLoginSenha.Size = new System.Drawing.Size(180, 28);
             this.tbLoginSenha.TabIndex = 5;
             // 
             // btnLogar
@@ -106,7 +106,7 @@
             this.cbMostrarSenha.ForeColor = System.Drawing.Color.White;
             this.cbMostrarSenha.Location = new System.Drawing.Point(47, 196);
             this.cbMostrarSenha.Name = "cbMostrarSenha";
-            this.cbMostrarSenha.Size = new System.Drawing.Size(102, 19);
+            this.cbMostrarSenha.Size = new System.Drawing.Size(126, 24);
             this.cbMostrarSenha.TabIndex = 9;
             this.cbMostrarSenha.Text = "Mostrar Senha";
             this.cbMostrarSenha.UseVisualStyleBackColor = true;
@@ -119,7 +119,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(49, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 17);
+            this.label2.Size = new System.Drawing.Size(75, 23);
             this.label2.TabIndex = 10;
             this.label2.Text = "Usuario*";
             // 
@@ -128,9 +128,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(49, 150);
+            this.label4.Location = new System.Drawing.Point(49, 148);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 17);
+            this.label4.Size = new System.Drawing.Size(64, 23);
             this.label4.TabIndex = 11;
             this.label4.Text = "Senha*";
             // 
@@ -152,7 +152,7 @@
             this.lnkCriarConta.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lnkCriarConta.Location = new System.Drawing.Point(96, 284);
             this.lnkCriarConta.Name = "lnkCriarConta";
-            this.lnkCriarConta.Size = new System.Drawing.Size(67, 15);
+            this.lnkCriarConta.Size = new System.Drawing.Size(83, 20);
             this.lnkCriarConta.TabIndex = 12;
             this.lnkCriarConta.TabStop = true;
             this.lnkCriarConta.Text = "Criar Conta";

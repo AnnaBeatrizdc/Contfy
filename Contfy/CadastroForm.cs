@@ -83,6 +83,17 @@ namespace Contfy
             // Quando o usuário sair do campo de CEP, buscar as informações do endereço usando a classe CepBLL e preencher os campos de rua, bairro, cidade e estado
             UsuarioMdl cep = CepBLL1.BuscarCEP(mtbCEP.Text);
 
+            if (Erro.getErro())
+            {
+                MessageBox.Show(Erro.getMens(),
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+
+                return;
+            }
+
+
             tbRua.Text = cep.getLogradouro();
             tbBairro.Text = cep.getBairro();
             tbCidade.Text = cep.getLocalidade();

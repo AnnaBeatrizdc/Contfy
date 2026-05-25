@@ -15,6 +15,7 @@ namespace Contfy.Models
         public String senha;
         public String telefone;
         public String cep;
+        public bool erro { get; set; }
         public String logradouro;
         public String bairro;
         public String localidade;
